@@ -1,4 +1,6 @@
 
+using System;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,13 +8,16 @@ public class PlayerController : MonoBehaviour
 {
     private Vector2 MovementInput;
     [SerializeField]
-    private bool upMovement = false;
+    public bool upMovement = false;
     public bool grounded = true;
 
     [SerializeField]
     private float speed = 5f;
     [SerializeField]
-    private float jumpHeight = 5;
+    private float jumpHeight = 2.0f;
+    private float gravity = Math.Abs(Physics.gravity.y);
+    private float jumpVelocity;
+
 
     public Rigidbody playerRb;
     public PlayerInput playerInput;
@@ -21,6 +26,8 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = gameObject.GetComponent<Rigidbody>();
         playerInput = gameObject.GetComponent<PlayerInput>();
+
+        jumpVelocity = Mathf.Sqrt(2 * gravity * jumpHeight);
 
         playerInput.actions["Move"].performed += OnMove;
         playerInput.actions["Move"].canceled += OnMove;
@@ -44,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         if (grounded)
         {
-            playerRb.AddForce(Vector2.up * jumpHeight, ForceMode.Impulse);
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpVelocity);
             grounded = false;
         }
     }
