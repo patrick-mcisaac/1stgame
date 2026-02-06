@@ -1,12 +1,12 @@
 
 using System;
-using UnityEditor.Callbacks;
+// using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 MovementInput;
+    public Vector2 MovementInput;
     [SerializeField]
     public bool upMovement = false;
     public bool grounded = true;
@@ -37,9 +37,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // movement if not on ladder
+        if (!upMovement)
+        {
+            Vector3 movement = new Vector3(MovementInput.x, 0, 0);
+            transform.position += movement * speed * Time.deltaTime;
+        }
 
-        Vector3 movement = new Vector3(MovementInput.x, upMovement ? MovementInput.y : 0, 0);
-        transform.position += movement * speed * Time.deltaTime;
     }
 
     void OnMove(InputAction.CallbackContext context)

@@ -19,20 +19,4 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ladder"))
-        {
-
-            playerRb.useGravity = false;
-            playerRb.linearVelocity = new Vector2(0, 0);
-            playerController.upMovement = true;
-        }
-
-    }
-
-    // Working on ladder functionality  use ladder enter and exit functions on triggers
-
-
-
 }
