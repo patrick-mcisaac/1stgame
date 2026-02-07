@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Ground
   - Ladder
-  - Ladder End
   - Moving Platform
+  - Ladder Trigger
   layers:
   - Default
   - TransparentFX

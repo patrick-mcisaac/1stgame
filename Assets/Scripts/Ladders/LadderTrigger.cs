@@ -15,7 +15,7 @@ public class LadderTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Ladder End"))
+        if (other.gameObject.CompareTag("Ladder Trigger"))
         {
             playerController.upMovement = !playerController.upMovement;
             playerRb.useGravity = !playerRb.useGravity;
@@ -24,7 +24,7 @@ public class LadderTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Ladder End"))
+        if (other.gameObject.CompareTag("Ladder Trigger"))
         {
             playerController.upMovement = !playerController.upMovement;
             playerRb.useGravity = !playerRb.useGravity;
@@ -37,9 +37,9 @@ public class LadderTrigger : MonoBehaviour
         // Movement if on ladder
         if (playerController.upMovement)
         {
-            playerRb.linearVelocity = new Vector2(0, 0);
+            playerRb.linearVelocity = new Vector3(0, 0, 0);
             Vector3 movement = new Vector3(0, playerController.MovementInput.y, 0);
-            transform.position += movement * speedUpDown * Time.deltaTime;
+            playerRb.MovePosition(transform.position + movement * speedUpDown * Time.deltaTime);
         }
     }
 }

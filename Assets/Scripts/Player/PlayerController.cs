@@ -51,14 +51,13 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rayDistance = playerCollider.size.y / 2 + rayOffset;
-        Debug.DrawRay(transform.position, Vector3.down * rayDistance, Color.red);
         // movement if not on ladder
         if (!upMovement)
         {
             Vector3 movement = new Vector3(MovementInput.x, 0, 0);
             playerRb.MovePosition(playerRb.position + movement * speed * Time.deltaTime);
         }
-        // CheckGrounded();
+
 
     }
 
@@ -72,22 +71,19 @@ public class PlayerController : MonoBehaviour
         if (CheckGrounded())
         {
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, jumpVelocity);
-            // grounded = false;
+
         }
     }
 
+    private bool CheckGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, rayDistance, LayerMask.GetMask("Ground"));
+    }
     void OnDestroy()
     {
         playerInput.actions["Move"].performed -= OnMove;
         playerInput.actions["Move"].canceled -= OnMove;
         playerInput.actions["Jump"].performed -= OnJump;
     }
-
-    bool CheckGrounded()
-    {
-        // Vector3 rayOrigin = transform.position + rayOffset;
-        return Physics.Raycast(transform.position, Vector3.down, rayDistance, LayerMask.GetMask("Ground"));
-    }
-
 
 }
