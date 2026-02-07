@@ -10,12 +10,20 @@ public class PlayerCollision : MonoBehaviour
         playerRb = gameObject.GetComponent<Rigidbody>();
     }
 
-    void OnCollisionEnter(Collision collision)
+
+    void OnTriggerEnter(Collider other)
     {
-        // Set grounded to true in player controller
-        if (collision.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Moving Platform"))
         {
-            playerController.grounded = true;
+            gameObject.transform.parent = other.transform;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Moving Platform"))
+        {
+            gameObject.transform.parent = null;
         }
     }
 
