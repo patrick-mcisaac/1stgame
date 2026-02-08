@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5213690853501560883}
-  - component: {fileID: 777429735585903851}
+  - component: {fileID: -4460497276309782956}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 9194390544717614594}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &777429735585903851
+--- !u!114 &-4460497276309782956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6846633118868735672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7283295fa5fa4bf49beaf720c9d78777, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a12757ed6ab0b745be023a070e93c69, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  m_EditorClassIdentifier: Assembly-CSharp::Laser
   projectileSpeed: 15
   childProjectile: {fileID: 8256868496148450359}
 --- !u!1 &8256868496148450359

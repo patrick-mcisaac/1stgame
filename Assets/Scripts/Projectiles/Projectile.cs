@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private Vector3 direction;
-    private GameObject player;
+    protected Vector3 direction;
+    protected GameObject player;
     [SerializeField]
-    private float projectileSpeed = 15f;
+    protected float projectileSpeed = 15f;
 
-    public GameObject childProjectile;
-    void Awake()
+
+
+    protected virtual void Awake()
     {
         player = GameObject.Find("Player");
         direction = (player.transform.position - transform.position).normalized;
-        childProjectile.transform.LookAt(player.transform.position);
-        transform.Rotate(0, 0, 90);
+
     }
 
-    void Update()
+    protected virtual void Update()
     {
         transform.position += direction * Time.deltaTime * projectileSpeed;
     }
