@@ -3,15 +3,15 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     private PlayerController playerController;
-    private Rigidbody playerRb;
+    private Rigidbody2D playerRb;
     void Awake()
     {
         playerController = gameObject.GetComponent<PlayerController>();
-        playerRb = gameObject.GetComponent<Rigidbody>();
+        playerRb = gameObject.GetComponent<Rigidbody2D>();
     }
 
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Moving Platform"))
         {
@@ -19,7 +19,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Moving Platform"))
         {

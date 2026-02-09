@@ -17,8 +17,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public static GameManager Instance { get; set; }
+
+    private void Awake()
     {
+        Instance = this;
         playerHealth = 100;
     }
+
 }

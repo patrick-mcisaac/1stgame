@@ -7,8 +7,9 @@ public class FallingFloor : MonoBehaviour
     public bool startTimer = false;
     private float fallTime = 2f;
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        // TODO: change from compare tag to tryGetComponent
         if (collision.gameObject.CompareTag("Player"))
         {
             startTimer = true;
@@ -23,8 +24,8 @@ public class FallingFloor : MonoBehaviour
 
             if (timer > fallTime)
             {
-                gameObject.GetComponent<Rigidbody>().useGravity = true;
-                gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             }
         }
     }

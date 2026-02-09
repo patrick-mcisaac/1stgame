@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 MovementInput;
     [SerializeField] public bool upMovement = false;
 
-    private BoxCollider playerCollider;
+    private BoxCollider2D playerCollider;
 
     [Header("Speed")]
     [SerializeField]
@@ -28,16 +28,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rayDistance;
     [SerializeField] private float rayOffset = 0.3f;
 
-    private float gravity = Math.Abs(Physics.gravity.y);
-    private Rigidbody playerRb;
+    private float gravity;
+    private Rigidbody2D playerRb;
     private PlayerInput playerInput;
 
     private void Awake()
     {
-        playerRb = gameObject.GetComponent<Rigidbody>();
+        playerRb = gameObject.GetComponent<Rigidbody2D>();
         playerInput = gameObject.GetComponent<PlayerInput>();
-        playerCollider = gameObject.GetComponent<BoxCollider>();
-
+        playerCollider = gameObject.GetComponent<BoxCollider2D>();
+        gravity = Math.Abs(Physics2D.gravity.y);
 
 
         jumpVelocity = Mathf.Sqrt(2 * gravity * jumpHeight);
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         // movement if not on ladder
         if (!upMovement)
         {
-            Vector3 movement = new Vector3(MovementInput.x, 0, 0);
+            Vector2 movement = new Vector2(MovementInput.x, 0);
             playerRb.MovePosition(playerRb.position + movement * speed * Time.deltaTime);
         }
 
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, rayDistance, LayerMask.GetMask("Ground"));
+        return Physics2D.Raycast(transform.position, Vector2.down, rayDistance, LayerMask.GetMask("Ground"));
     }
     void OnDestroy()
     {

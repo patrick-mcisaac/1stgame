@@ -33,7 +33,7 @@ public class Alien : Enemy
 
     private void CheckPlayerDistance()
     {
-        isInRange = Physics.Raycast(transform.position, player.transform.position - transform.position, maxDistance, LayerMask.GetMask("Player"));
+        isInRange = Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxDistance, LayerMask.GetMask("Player"));
     }
 
     IEnumerator SpawnProjectile()
