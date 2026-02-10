@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 137765472}
   - component: {fileID: 137765474}
   - component: {fileID: 137765475}
+  - component: {fileID: 137765476}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -259,7 +260,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &137765474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,8 +306,22 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  bullet: {fileID: 2284697256868298780, guid: f9800ea3130bb454394e9ef7897394e1, type: 3}
   moveSpeed: 20
   jumpHeight: 4
+  movementInput: {x: 0, y: 0}
+--- !u!114 &137765476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137765470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359147231a8c38b42812c96e7502fc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisions
 --- !u!1 &217627228
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1528509661}
+  - component: {fileID: 1528509662}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -932,6 +948,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1528509662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528509660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e64b4c6dc0f984da8382023c476457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1 &1546002230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,7 +1458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c070597b9c2d644b9a0cd94e7ee5a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Turret
-  damageDealt: 5
   damageTaken: 5
   baseHealth: 100
   laser: {fileID: 1750038919162137342, guid: 49c544361d3a2f9489935ca7b769ed46, type: 3}

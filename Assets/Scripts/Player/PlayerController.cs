@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -11,12 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     private float rayCastOffset = .1f;
 
+    [SerializeField] private PlayerBullet bullet;
+
     [SerializeField] private float moveSpeed = 20f;
     [SerializeField] private float jumpHeight = 4f;
     private float gravityMultiplier = 1f;
 
     private PlayerInput playerInput;
-    private Vector2 movementInput;
+    public Vector2 movementInput;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
         playerInput.actions["Move"].performed += OnMove;
         playerInput.actions["Move"].canceled += OnMove;
         playerInput.actions["Jump"].performed += OnJump;
+        playerInput.actions["Fire"].performed += OnFire;
     }
 
     private void FixedUpdate()
@@ -41,6 +45,14 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+        if (movementInput.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+        if (movementInput.x < 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -50,6 +62,11 @@ public class PlayerController : MonoBehaviour
             float jumpVelocity = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * gravityMultiplier));
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocityX, jumpVelocity);
         }
+    }
+
+    private void OnFire(InputAction.CallbackContext context)
+    {
+        Instantiate(bullet, transform.position, transform.rotation);
     }
 
     private void OnDestroy()

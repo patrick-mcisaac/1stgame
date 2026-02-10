@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         }
         set
         {
-            _playerHealth += value;
+            _playerHealth = value;
         }
     }
 
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        PlayerHealth = 100;
     }
 
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 780845028716657759}
   - component: {fileID: -7589726944346198046}
   - component: {fileID: 7434606392062602814}
+  - component: {fileID: 7715725271937761509}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -74,6 +75,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7715725271937761509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750038919162137342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0594ee5e507566b468568def94d4f1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  damageMultiplier: 1
 --- !u!1 &8271954672316253487
 GameObject:
   m_ObjectHideFlags: 0
