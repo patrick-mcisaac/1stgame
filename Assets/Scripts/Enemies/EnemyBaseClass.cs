@@ -7,7 +7,7 @@ public class EnemyBaseClass : MonoBehaviour
     [SerializeField] protected float baseHealth = 100f;
 
 
-    protected virtual void TakeDamage()
+    public virtual void TakeDamage()
     {
         if (baseHealth - damageTaken > 0)
         {

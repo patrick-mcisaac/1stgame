@@ -22,5 +22,9 @@ public class PlayerBullet : MonoBehaviour
 
     }
 
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 
 }
