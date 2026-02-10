@@ -10,7 +10,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void Awake()
     {
-        bulletRb = gameObject.GetComponent<Rigidbody2D>();
+        bulletRb = gameObject.GetComponentInParent<Rigidbody2D>();
     }
 
     private void Start()
@@ -24,7 +24,7 @@ public class PlayerBullet : MonoBehaviour
 
     public void DestroySelf()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
 }

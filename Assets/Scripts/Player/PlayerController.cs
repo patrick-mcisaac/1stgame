@@ -1,7 +1,5 @@
+
 using System;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     private float rayCastOffset = .1f;
 
-    [SerializeField] private PlayerBullet bullet;
+    [SerializeField] private GameObject bullet;
 
     [SerializeField] private float moveSpeed = 20f;
     [SerializeField] private float jumpHeight = 4f;
@@ -20,6 +18,10 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInput playerInput;
     public Vector2 movementInput;
+    private PlayerCollisions collisions;
+
+    public bool isOnLadder = false;
+    private float climbSpeed = 2f;
 
     private void Awake()
     {
@@ -29,16 +31,35 @@ public class PlayerController : MonoBehaviour
 
         playerRb.gravityScale = gravityMultiplier;
 
+
         playerInput.actions["Move"].performed += OnMove;
         playerInput.actions["Move"].canceled += OnMove;
         playerInput.actions["Jump"].performed += OnJump;
         playerInput.actions["Fire"].performed += OnFire;
+
+    }
+
+    private void Start()
+    {
+        collisions = gameObject.GetComponent<PlayerCollisions>();
+        collisions.OnLadder += OnLadder;
+        collisions.OffLadder += OffLadder;
+
     }
 
     private void FixedUpdate()
     {
-        Vector2 movement = new Vector2(movementInput.x, 0);
-        playerRb.AddForce(moveSpeed * movement, ForceMode2D.Impulse);
+        if (!isOnLadder)
+        {
+            Vector2 movement = new Vector2(movementInput.x, 0);
+            playerRb.AddForce(moveSpeed * movement, ForceMode2D.Impulse);
+        }
+        if (isOnLadder)
+        {
+            Vector2 movement = new Vector2(0, movementInput.y);
+
+            transform.Translate(movement * climbSpeed * Time.deltaTime);
+        }
 
     }
 
@@ -79,5 +100,17 @@ public class PlayerController : MonoBehaviour
     private bool DetectGround()
     {
         return Physics2D.Raycast(transform.position, -transform.up, playerCollider.size.y / 2 + rayCastOffset, groundLayerMask);
+    }
+
+    private void OnLadder(object sender, EventArgs e)
+    {
+        isOnLadder = true;
+        playerRb.gravityScale = 0;
+    }
+
+    private void OffLadder(object sender, EventArgs e)
+    {
+        isOnLadder = false;
+        playerRb.gravityScale = gravityMultiplier;
     }
 }

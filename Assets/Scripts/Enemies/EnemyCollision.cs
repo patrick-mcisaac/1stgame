@@ -5,8 +5,8 @@ public class EnemyCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerBullet bullet = collision.GetComponentInParent<PlayerBullet>();
-        if (bullet != null)
+
+        if (collision.TryGetComponent<PlayerBullet>(out PlayerBullet bullet))
         {
             bullet.DestroySelf();
             gameObject.GetComponent<EnemyBaseClass>().TakeDamage();

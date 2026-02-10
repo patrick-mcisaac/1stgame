@@ -1,13 +1,17 @@
 using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class TurretTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     public EventHandler TriggerEnter;
     public EventHandler TriggerExit;
+
+    private void Start()
+    {
+        player = GameObject.FindFirstObjectByType<PlayerController>().gameObject;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
