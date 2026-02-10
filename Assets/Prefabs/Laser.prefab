@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 780845028716657759}
   - component: {fileID: -7589726944346198046}
+  - component: {fileID: 7434606392062602814}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -45,6 +46,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d821025a558fca0429fb8ad95d333e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveForward
+  moveSpeed: 10
+--- !u!50 &7434606392062602814
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750038919162137342}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8271954672316253487
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +85,7 @@ GameObject:
   - component: {fileID: 1987347727047395027}
   - component: {fileID: 6784292586514117311}
   - component: {fileID: 2233936874314589549}
+  - component: {fileID: 4680856383119152175}
   m_Layer: 0
   m_Name: 'Laser '
   m_TagString: Untagged
@@ -183,3 +213,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4680856383119152175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8271954672316253487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8f57bd7e83c5c4e93b57e6857c8336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LookToPlayer

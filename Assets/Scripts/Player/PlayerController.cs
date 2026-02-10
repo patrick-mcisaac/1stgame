@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,6 +7,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRb;
+    private BoxCollider2D playerCollider;
+    [SerializeField] private LayerMask groundLayerMask;
+    private float rayCastOffset = .1f;
+
     [SerializeField] private float moveSpeed = 20f;
     [SerializeField] private float jumpHeight = 4f;
     private float gravityMultiplier = 1f;
@@ -17,6 +22,8 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = gameObject.GetComponent<Rigidbody2D>();
         playerInput = gameObject.GetComponent<PlayerInput>();
+        playerCollider = gameObject.GetComponent<BoxCollider2D>();
+
         playerRb.gravityScale = gravityMultiplier;
 
         playerInput.actions["Move"].performed += OnMove;
@@ -38,8 +45,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        float jumpVelocity = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * gravityMultiplier));
-        playerRb.linearVelocity = new Vector2(playerRb.linearVelocityX, jumpVelocity);
+        if (DetectGround())
+        {
+            float jumpVelocity = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * gravityMultiplier));
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocityX, jumpVelocity);
+        }
     }
 
     private void OnDestroy()
@@ -47,5 +57,10 @@ public class PlayerController : MonoBehaviour
         playerInput.actions["Move"].performed -= OnMove;
         playerInput.actions["Move"].canceled -= OnMove;
         playerInput.actions["Jump"].performed -= OnJump;
+    }
+
+    private bool DetectGround()
+    {
+        return Physics2D.Raycast(transform.position, -transform.up, playerCollider.size.y / 2 + rayCastOffset, groundLayerMask);
     }
 }
